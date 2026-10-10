@@ -31,7 +31,7 @@ jobs:
         run: |
           docker build -t riskshield2:test .
           docker run -d --name riskshield-smoke -p 127.0.0.1:8000:8000 -v "$PWD/registry:/app/registry:ro" -e RISKSHIELD_ENV=production -e RISKSHIELD_API_KEY=ci-test-key-not-a-secret-12345 riskshield2:test
-          curl --fail --retry 15 --retry-delay 2 --retry-connrefused http://127.0.0.1:8000/ready
+          curl --fail --max-time 5 --retry 30 --retry-delay 2 --retry-all-errors --retry-max-time 90 http://127.0.0.1:8000/ready
           curl --fail -H 'X-API-Key: ci-test-key-not-a-secret-12345' http://127.0.0.1:8000/v1/models
       - name: Container logs and cleanup
         if: always() && runner.os == 'Linux'
