@@ -1,0 +1,137 @@
+{
+  "data": "real UCI Default of Credit Card Clients benchmark",
+  "source": "https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients",
+  "citation": "Yeh, I. (2009). Default of Credit Card Clients. DOI:10.24432/C55S3H. CC BY 4.0.",
+  "sha256": "30c6be3abd8dcfd3e6096c828bad8c2f011238620f5369220bd60cfc82700933",
+  "split_protocol": "five disjoint stratified random splits, seed 42; no application timestamps available",
+  "duplicates_removed": 35,
+  "features": [
+    "LIMIT_BAL",
+    "PAY_0",
+    "PAY_2",
+    "PAY_3",
+    "PAY_4",
+    "PAY_5",
+    "PAY_6",
+    "BILL_AMT1",
+    "BILL_AMT2",
+    "BILL_AMT3",
+    "BILL_AMT4",
+    "BILL_AMT5",
+    "BILL_AMT6",
+    "PAY_AMT1",
+    "PAY_AMT2",
+    "PAY_AMT3",
+    "PAY_AMT4",
+    "PAY_AMT5",
+    "PAY_AMT6"
+  ],
+  "limitations": [
+    "Historical Taiwanese credit-card snapshot; temporal generalization cannot be tested.",
+    "Demographic columns excluded; this does not establish fairness.",
+    "Features describe existing card accounts, not new loan applications.",
+    "Illustrative perfect-review costs are not real loss estimates."
+  ],
+  "task": "credit",
+  "rows": 29965,
+  "event_rate": 0.22125813449023862,
+  "selected_model": "catboost",
+  "calibration": "platt",
+  "decline_threshold": 0.7789795918367346,
+  "review_threshold": 0.047469387755102045,
+  "test_cost_per_transaction": 1.0186853520186854,
+  "review_all_test_cost": 1.0,
+  "approve_all_test_cost": 22.12212212212212,
+  "test_action_counts": {
+    "approve": 39,
+    "review": 2953,
+    "decline": 5
+  },
+  "test_event_rate": 0.22122122122122123,
+  "split_positive_counts": {
+    "train": 3646,
+    "calibration": 995,
+    "selection": 663,
+    "policy": 663,
+    "test": 663
+  },
+  "split_rows": {
+    "train": 16480,
+    "calibration": 4495,
+    "selection": 2996,
+    "policy": 2997,
+    "test": 2997
+  },
+  "models": [
+    {
+      "model": "logistic",
+      "calibration": "platt",
+      "selection_brier": 0.1450547291529487,
+      "test_pr_auc": 0.5300567557749254,
+      "test_brier": 0.143093597710747
+    },
+    {
+      "model": "logistic",
+      "calibration": "isotonic",
+      "selection_brier": 0.14064403648329438,
+      "test_pr_auc": 0.5069012556050156,
+      "test_brier": 0.13757358065591466
+    },
+    {
+      "model": "random_forest",
+      "calibration": "platt",
+      "selection_brier": 0.13566571400599078,
+      "test_pr_auc": 0.572903507322935,
+      "test_brier": 0.13252302046533246
+    },
+    {
+      "model": "random_forest",
+      "calibration": "isotonic",
+      "selection_brier": 0.13644056813494648,
+      "test_pr_auc": 0.5531103553221882,
+      "test_brier": 0.1324296125077112
+    },
+    {
+      "model": "xgboost",
+      "calibration": "platt",
+      "selection_brier": 0.1360873281955719,
+      "test_pr_auc": 0.5758588345142713,
+      "test_brier": 0.13181613385677338
+    },
+    {
+      "model": "xgboost",
+      "calibration": "isotonic",
+      "selection_brier": 0.1363280713558197,
+      "test_pr_auc": 0.5559574191178983,
+      "test_brier": 0.13307669758796692
+    },
+    {
+      "model": "lightgbm",
+      "calibration": "platt",
+      "selection_brier": 0.13543582387829353,
+      "test_pr_auc": 0.5789325599858621,
+      "test_brier": 0.13151115681864134
+    },
+    {
+      "model": "lightgbm",
+      "calibration": "isotonic",
+      "selection_brier": 0.13588449489666007,
+      "test_pr_auc": 0.5472915739284011,
+      "test_brier": 0.13238933609328363
+    },
+    {
+      "model": "catboost",
+      "calibration": "platt",
+      "selection_brier": 0.13534005491763673,
+      "test_pr_auc": 0.5766521481388711,
+      "test_brier": 0.13147093408776303
+    },
+    {
+      "model": "catboost",
+      "calibration": "isotonic",
+      "selection_brier": 0.13588772406028451,
+      "test_pr_auc": 0.5625943578956982,
+      "test_brier": 0.1315498324414941
+    }
+  ]
+}

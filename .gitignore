@@ -1,0 +1,17 @@
+.venv/
+.deps/
+__pycache__/
+.pytest_cache/
+artifacts/**/*.joblib
+artifacts/*.joblib
+data/
+catboost_info/
+registry/
+runtime/
+.env
+*.egg-info/
+build/
+dist/
+.coverage
+htmlcov/
+.ruff_cache/

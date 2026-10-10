@@ -1,0 +1,14 @@
+services:
+  api:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      RISKSHIELD_ENV: production
+      RISKSHIELD_API_KEY: ${RISKSHIELD_API_KEY:?Set a random API key of at least 24 characters}
+    volumes:
+      - ./registry:/app/registry:ro
+      - audit:/app/runtime
+    restart: unless-stopped
+volumes:
+  audit:

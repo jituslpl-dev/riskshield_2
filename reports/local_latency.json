@@ -1,0 +1,7 @@
+{
+  "method": "sequential in-process FastAPI TestClient, warm model; includes SQLite audit writes",
+  "requests": 100,
+  "p50_ms": 19.634550029877573,
+  "p95_ms": 25.272699998458847,
+  "note": "Not a production SLA, network benchmark, or concurrent load test."
+}

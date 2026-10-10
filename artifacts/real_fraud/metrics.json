@@ -1,0 +1,168 @@
+{
+  "data": "real anonymized ULB/Worldline credit-card fraud benchmark",
+  "source": "https://www.openml.org/search?type=data&id=1597",
+  "sha256": "fdaf12730dc1fc426f318b71349f24f5c5fd00aa1152940be7e7509ae3d89d2a",
+  "split_protocol": "chronological by Time; simultaneous timestamps stay in one split",
+  "duplicates_removed": 1081,
+  "features": [
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V5",
+    "V6",
+    "V7",
+    "V8",
+    "V9",
+    "V10",
+    "V11",
+    "V12",
+    "V13",
+    "V14",
+    "V15",
+    "V16",
+    "V17",
+    "V18",
+    "V19",
+    "V20",
+    "V21",
+    "V22",
+    "V23",
+    "V24",
+    "V25",
+    "V26",
+    "V27",
+    "V28",
+    "Amount"
+  ],
+  "limitations": [
+    "Only two days of historical 2013 data; not production validation.",
+    "No account identifiers: account velocity features cannot be evaluated.",
+    "V1-V28 are publisher-provided PCA features; their original preprocessing cannot be audited.",
+    "SHAP values for PCA components are mathematical contributions, not human-readable reasons."
+  ],
+  "split_time_ranges": {
+    "train": [
+      0.0,
+      108576.0
+    ],
+    "calibration": [
+      108580.0,
+      132905.0
+    ],
+    "selection": [
+      132906.0,
+      145233.0
+    ],
+    "policy": [
+      145234.0,
+      157630.0
+    ],
+    "test": [
+      157631.0,
+      172792.0
+    ]
+  },
+  "task": "fraud",
+  "rows": 283726,
+  "event_rate": 0.001667101358352777,
+  "selected_model": "logistic",
+  "calibration": "isotonic",
+  "decline_threshold": 0.6063265306122448,
+  "review_threshold": 0.01716326530612245,
+  "test_cost_per_transaction": 0.019875951508316888,
+  "review_all_test_cost": 1.0,
+  "approve_all_test_cost": 0.07753030730194531,
+  "test_action_counts": {
+    "approve": 28308,
+    "review": 59,
+    "decline": 9
+  },
+  "test_event_rate": 0.0007753030730194531,
+  "split_positive_counts": {
+    "train": 332,
+    "calibration": 34,
+    "selection": 33,
+    "policy": 52,
+    "test": 22
+  },
+  "split_rows": {
+    "train": 156049,
+    "calibration": 42558,
+    "selection": 28373,
+    "policy": 28370,
+    "test": 28376
+  },
+  "models": [
+    {
+      "model": "logistic",
+      "calibration": "platt",
+      "selection_brier": 0.0002883703966262754,
+      "test_pr_auc": 0.6446957158840794,
+      "test_brier": 0.0003538607042090591
+    },
+    {
+      "model": "logistic",
+      "calibration": "isotonic",
+      "selection_brier": 0.00028391962865822475,
+      "test_pr_auc": 0.6204979987100949,
+      "test_brier": 0.00036180638654003256
+    },
+    {
+      "model": "random_forest",
+      "calibration": "platt",
+      "selection_brier": 0.00031925422118367553,
+      "test_pr_auc": 0.690486551100038,
+      "test_brier": 0.0003396046160142765
+    },
+    {
+      "model": "random_forest",
+      "calibration": "isotonic",
+      "selection_brier": 0.0002992645233750323,
+      "test_pr_auc": 0.5818198600170048,
+      "test_brier": 0.00039573880807229535
+    },
+    {
+      "model": "xgboost",
+      "calibration": "platt",
+      "selection_brier": 0.00035834364825859666,
+      "test_pr_auc": 0.6898580118566857,
+      "test_brier": 0.0003636321926023811
+    },
+    {
+      "model": "xgboost",
+      "calibration": "isotonic",
+      "selection_brier": 0.0003418385749682784,
+      "test_pr_auc": 0.6045210133261687,
+      "test_brier": 0.00037463573971763253
+    },
+    {
+      "model": "lightgbm",
+      "calibration": "platt",
+      "selection_brier": 0.0011278577128395737,
+      "test_pr_auc": 0.03347825788194497,
+      "test_brier": 0.0007536772251896159
+    },
+    {
+      "model": "lightgbm",
+      "calibration": "isotonic",
+      "selection_brier": 0.0011229154592799833,
+      "test_pr_auc": 0.03314781286935974,
+      "test_brier": 0.0007511827413269278
+    },
+    {
+      "model": "catboost",
+      "calibration": "platt",
+      "selection_brier": 0.00035444608089658263,
+      "test_pr_auc": 0.6724194013094911,
+      "test_brier": 0.0003753644315552164
+    },
+    {
+      "model": "catboost",
+      "calibration": "isotonic",
+      "selection_brier": 0.0003109181317374421,
+      "test_pr_auc": 0.6562811787049683,
+      "test_brier": 0.00036974420695213796
+    }
+  ]
+}

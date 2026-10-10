@@ -1,0 +1,119 @@
+{
+  "data": "real anonymized ULB/Worldline credit-card fraud benchmark",
+  "source": "https://www.openml.org/search?type=data&id=1597",
+  "sha256": "fdaf12730dc1fc426f318b71349f24f5c5fd00aa1152940be7e7509ae3d89d2a",
+  "split_protocol": "chronological by Time; simultaneous timestamps stay in one split",
+  "duplicates_removed": 1081,
+  "features": [
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V5",
+    "V6",
+    "V7",
+    "V8",
+    "V9",
+    "V10",
+    "V11",
+    "V12",
+    "V13",
+    "V14",
+    "V15",
+    "V16",
+    "V17",
+    "V18",
+    "V19",
+    "V20",
+    "V21",
+    "V22",
+    "V23",
+    "V24",
+    "V25",
+    "V26",
+    "V27",
+    "V28",
+    "Amount"
+  ],
+  "limitations": [
+    "Only two days of historical 2013 data; not production validation.",
+    "No account identifiers: account velocity features cannot be evaluated.",
+    "V1-V28 are publisher-provided PCA features; their original preprocessing cannot be audited.",
+    "SHAP values for PCA components are mathematical contributions, not human-readable reasons."
+  ],
+  "split_time_ranges": {
+    "train": [
+      0.0,
+      108576.0
+    ],
+    "calibration": [
+      108580.0,
+      132905.0
+    ],
+    "selection": [
+      132906.0,
+      145233.0
+    ],
+    "policy": [
+      145234.0,
+      157630.0
+    ],
+    "test": [
+      157631.0,
+      172792.0
+    ]
+  },
+  "task": "fraud",
+  "test_metrics": {
+    "pr_auc": 0.6204979987100949,
+    "brier": 0.00036180638654003256,
+    "ece": 0.00018106335120147103,
+    "calibration_bins": [
+      {
+        "count": 28362,
+        "mean_probability": 0.00021282206437435013,
+        "event_rate": 0.00031732599957689866
+      },
+      {
+        "count": 5,
+        "mean_probability": 0.6,
+        "event_rate": 1.0
+      },
+      {
+        "count": 9,
+        "mean_probability": 0.8695652173913043,
+        "event_rate": 0.8888888888888888
+      }
+    ]
+  },
+  "confidence_intervals": {
+    "method": "stratified row bootstrap; temporal dependence not modeled",
+    "repeats": 300,
+    "pr_auc_95": [
+      0.4282394895823866,
+      0.8248807781315604
+    ],
+    "brier_95": [
+      0.00020326727044370365,
+      0.0005098936127366521
+    ]
+  },
+  "policy": {
+    "method": "expected costs; fixed before test evaluation, imperfect review assumed",
+    "test_cost_per_record": 0.02049266986185509,
+    "action_counts": {
+      "approve": 28308,
+      "review": 54,
+      "decline": 14
+    },
+    "review_all_cost": 1.0538377502114464
+  },
+  "score_shift_policy_to_test": {
+    "psi": 0.0010038390284026685,
+    "reference_count": 28370,
+    "current_count": 28376,
+    "warning": false,
+    "note": "PSI threshold 0.2 is heuristic; investigate before acting."
+  },
+  "note": "Frozen original benchmark models; additional diagnostics do not refit or select on test data."
+}

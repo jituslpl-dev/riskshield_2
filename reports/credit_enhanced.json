@@ -1,0 +1,118 @@
+{
+  "data": "real UCI Default of Credit Card Clients benchmark",
+  "source": "https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients",
+  "citation": "Yeh, I. (2009). Default of Credit Card Clients. DOI:10.24432/C55S3H. CC BY 4.0.",
+  "sha256": "30c6be3abd8dcfd3e6096c828bad8c2f011238620f5369220bd60cfc82700933",
+  "split_protocol": "five disjoint stratified random splits, seed 42; no application timestamps available",
+  "duplicates_removed": 35,
+  "features": [
+    "LIMIT_BAL",
+    "PAY_0",
+    "PAY_2",
+    "PAY_3",
+    "PAY_4",
+    "PAY_5",
+    "PAY_6",
+    "BILL_AMT1",
+    "BILL_AMT2",
+    "BILL_AMT3",
+    "BILL_AMT4",
+    "BILL_AMT5",
+    "BILL_AMT6",
+    "PAY_AMT1",
+    "PAY_AMT2",
+    "PAY_AMT3",
+    "PAY_AMT4",
+    "PAY_AMT5",
+    "PAY_AMT6"
+  ],
+  "limitations": [
+    "Historical Taiwanese credit-card snapshot; temporal generalization cannot be tested.",
+    "Demographic columns excluded; this does not establish fairness.",
+    "Features describe existing card accounts, not new loan applications.",
+    "Illustrative perfect-review costs are not real loss estimates."
+  ],
+  "task": "credit",
+  "test_metrics": {
+    "pr_auc": 0.5766521481388711,
+    "brier": 0.13147093408776303,
+    "ece": 0.01317639468568812,
+    "calibration_bins": [
+      {
+        "count": 869,
+        "mean_probability": 0.07676954688315547,
+        "event_rate": 0.06214039125431531
+      },
+      {
+        "count": 1067,
+        "mean_probability": 0.14077007464221114,
+        "event_rate": 0.1330834114339269
+      },
+      {
+        "count": 398,
+        "mean_probability": 0.2401245623127705,
+        "event_rate": 0.24623115577889448
+      },
+      {
+        "count": 183,
+        "mean_probability": 0.3434453221872216,
+        "event_rate": 0.34972677595628415
+      },
+      {
+        "count": 75,
+        "mean_probability": 0.4479748429978644,
+        "event_rate": 0.48
+      },
+      {
+        "count": 107,
+        "mean_probability": 0.5590573214013312,
+        "event_rate": 0.514018691588785
+      },
+      {
+        "count": 163,
+        "mean_probability": 0.6511555687247489,
+        "event_rate": 0.6687116564417178
+      },
+      {
+        "count": 134,
+        "mean_probability": 0.7409139483693405,
+        "event_rate": 0.7761194029850746
+      },
+      {
+        "count": 1,
+        "mean_probability": 0.8048746324268023,
+        "event_rate": 1.0
+      }
+    ]
+  },
+  "confidence_intervals": {
+    "method": "stratified row bootstrap; temporal dependence not modeled",
+    "repeats": 300,
+    "pr_auc_95": [
+      0.5402219036336104,
+      0.6172748920691399
+    ],
+    "brier_95": [
+      0.1257000891858259,
+      0.13738933806003115
+    ]
+  },
+  "policy": {
+    "method": "expected costs; fixed before test evaluation, imperfect review assumed",
+    "test_cost_per_record": 1.7716716716716725,
+    "action_counts": {
+      "approve": 0,
+      "review": 2512,
+      "decline": 485
+    },
+    "review_all_cost": 2.1450450450450465
+  },
+  "score_shift_policy_to_test": {
+    "psi": 0.007324644257911523,
+    "reference_count": 2997,
+    "current_count": 2997,
+    "warning": false,
+    "note": "PSI threshold 0.2 is heuristic; investigate before acting."
+  },
+  "note": "Frozen original benchmark models; additional diagnostics do not refit or select on test data."
+}

@@ -1,0 +1,44 @@
+name: Quality and container smoke
+on: [push, pull_request]
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements-lock.txt
+      - run: pip install -r requirements-dev.txt
+      - run: pip install --no-deps -e .
+      - run: ruff check src tests scripts
+      - run: ruff format --check src tests scripts
+      - run: python -m pytest -q --cov=riskshield --cov-report=term-missing
+      - run: python -m riskshield.pipeline --rows 12000
+      - run: python -m riskshield.pipeline --task credit --rows 12000
+      - run: python -m riskshield.cli register --name fraud_demo --version ci --source artifacts
+      - run: python -m riskshield.cli register --name credit_demo --version ci --source artifacts/credit
+      - run: python -m riskshield.cli promote --name fraud_demo --version ci
+      - run: python -m riskshield.cli promote --name credit_demo --version ci
+      - run: python scripts/benchmark_api.py --requests 20
+      - run: python scripts/smoke_serving.py
+      - name: Build and smoke-test container
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          docker build -t riskshield2:test .
+          docker run -d --name riskshield-smoke -p 127.0.0.1:8000:8000 -v "$PWD/registry:/app/registry:ro" -e RISKSHIELD_ENV=production -e RISKSHIELD_API_KEY=ci-test-key-not-a-secret-12345 riskshield2:test
+          curl --fail --retry 15 --retry-delay 2 --retry-connrefused http://127.0.0.1:8000/ready
+          curl --fail -H 'X-API-Key: ci-test-key-not-a-secret-12345' http://127.0.0.1:8000/v1/models
+      - name: Container logs and cleanup
+        if: always() && runner.os == 'Linux'
+        run: docker logs riskshield-smoke || true; docker rm -f riskshield-smoke || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-${{ matrix.os }}
+          path: |
+            reports/
+            artifacts/**/metrics.json

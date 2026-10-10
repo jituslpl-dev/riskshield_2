@@ -1,0 +1,26 @@
+[
+  {
+    "model": "credit_demo",
+    "batch_status": 200,
+    "explanation_status": 200,
+    "additivity_error": 6.661338147750939e-16
+  },
+  {
+    "model": "credit_real",
+    "batch_status": 200,
+    "explanation_status": 200,
+    "additivity_error": 3.608224830031759e-16
+  },
+  {
+    "model": "fraud_demo",
+    "batch_status": 200,
+    "explanation_status": 200,
+    "additivity_error": 2.498001805406602e-16
+  },
+  {
+    "model": "fraud_real",
+    "batch_status": 200,
+    "explanation_status": 200,
+    "additivity_error": 5.204170427930421e-18
+  }
+]
